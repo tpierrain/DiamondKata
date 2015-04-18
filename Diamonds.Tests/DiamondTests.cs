@@ -8,22 +8,22 @@ namespace Diamonds.Tests
     public class DiamondTests
     {
         [Test]
-        public void ShouldDisplayA()
+        public void ShouldGenerateAsciiArtForA()
         {
-            Check.That(Diamond.Generate('A')).IsEqualTo("A");
+            Check.That(Diamond.GenerateAsciiArtFor('A')).IsEqualTo("A");
         }
        
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldThrowAnExceptionWhenNotAnUpperCaseLetter()
         {
-            Check.That(Diamond.Generate('a')).IsEqualTo("A");
+            Check.That(Diamond.GenerateAsciiArtFor('a')).IsEqualTo("A");
         }
 
         [Test]
-        public void ShouldDisplayDiamond()
+        public void ShouldGenerateAsciiArtForD()
         {
-            Check.That(Diamond.Generate('D')).IsEqualTo("...A...\n"+
+            Check.That(Diamond.GenerateAsciiArtFor('D')).IsEqualTo("...A...\n"+
                                                         "..B.B..\n"+
                                                         ".C...C.\n"+
                                                         "D.....D\n"+

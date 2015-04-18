@@ -35,7 +35,7 @@ namespace Diamonds
         /// </summary>
         /// <param name="letter">The upper cased letter to be used for the widest part of the diamond.</param>
         /// <returns>A diamond ASCII-art figure defined by the specified upper-cased letter.</returns>
-        public static string Generate(char letter)
+        public static string GenerateAsciiArtFor(char letter)
         {
             GuardFromNonUpperCasedLetter(letter);
 
@@ -103,11 +103,11 @@ namespace Diamonds
                 missingLines.Add(incompleteDiamond[lineIndex]);
             }
 
-            var fullDiamond = AddLines(incompleteDiamond, missingLines);
+            var fullDiamond = MergeDiamondWithLines(incompleteDiamond, missingLines);
             return fullDiamond;
         }
 
-        private static Diamond AddLines(Diamond incompleteDiamond, IEnumerable<string> linesToAdd)
+        private static Diamond MergeDiamondWithLines(Diamond incompleteDiamond, IEnumerable<string> linesToAdd)
         {
             var diamond = new Diamond(incompleteDiamond);
             diamond.lines.AddRange(linesToAdd);
