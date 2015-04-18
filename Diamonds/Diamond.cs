@@ -45,7 +45,7 @@ namespace Diamonds
             }
 
             var firstHalf = BuildFirstHalf(letter);
-            var completeDiamond = BuildCompleteDiamond(firstHalf);
+            var completeDiamond = MirrorDiamond(firstHalf);
 
             return completeDiamond.ToString();
         }
@@ -58,11 +58,11 @@ namespace Diamonds
             }
         }
 
-        private static Diamond BuildFirstHalf(char letter)
+        private static Diamond BuildFirstHalf(char stopLetter)
         {
             var diamond = new Diamond();
 
-            int externalPaddingCount = letter - 'A';
+            int externalPaddingCount = stopLetter - 'A';
             IEnumerator<int> oddNumberProvider = new NumberProvider().GetOddNumbers();
 
             foreach (var character in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
@@ -82,7 +82,7 @@ namespace Diamonds
                     diamond.AddLine(externalPadding + character + internalPadding + character + externalPadding);
                 }
                 
-                if (character == letter)
+                if (character == stopLetter)
                 {
                     break;
                 }
@@ -91,7 +91,7 @@ namespace Diamonds
             return diamond;
         }
 
-        private static Diamond BuildCompleteDiamond(Diamond incompleteDiamond)
+        private static Diamond MirrorDiamond(Diamond incompleteDiamond)
         {
             var missingLines = new List<string>();
             for (var lineIndex = incompleteDiamond.LinesCount - 2; lineIndex >= 0; lineIndex--)
