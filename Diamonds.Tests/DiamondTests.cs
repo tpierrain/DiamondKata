@@ -23,13 +23,13 @@ namespace Diamonds.Tests
         [Test]
         public void ShouldGenerateAsciiArtForD()
         {
-            Check.That(Diamond.GenerateAsciiArtFor('D')).IsEqualTo("...A...\n"+
-                                                        "..B.B..\n"+
-                                                        ".C...C.\n"+
-                                                        "D.....D\n"+
-                                                        ".C...C.\n" +
-                                                        "..B.B..\n" +
-                                                        "...A...");
+            Check.That(Diamond.GenerateAsciiArtFor('D')).IsEqualTo( "...A...\n"+
+                                                                    "..B.B..\n"+
+                                                                    ".C...C.\n"+
+                                                                    "D.....D\n"+
+                                                                    ".C...C.\n" +
+                                                                    "..B.B..\n" +
+                                                                    "...A...");
         }
     }
 }
