@@ -4,8 +4,37 @@ namespace Diamonds
     using System.Collections.Generic;
     using System.Text;
 
-    public static class Diamond
+    public class Diamond
     {
+        #region Fields, Constructors & indexer
+
+        private readonly List<string> lines;
+
+        private Diamond()
+        {
+            this.lines = new List<string>();
+        }
+
+        private Diamond(Diamond diamond)
+        {
+            this.lines = new List<string>(diamond.lines);
+        }
+
+        private string this[int lineIndex]
+        {
+            get
+            {
+                return this.lines[lineIndex];
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Generates a diamond figure defined by the specified letter.
+        /// </summary>
+        /// <param name="letter">The letter to be used for the widest part of the diamond.</param>
+        /// <returns>A diamond figure defined by the specified letter.</returns>
         public static string Generate(char letter)
         {
             GuardFromNonUpperCasedLetter(letter);
@@ -15,33 +44,27 @@ namespace Diamonds
                 return "A";
             }
 
-            List<string> diamond = BuildFirstHalf(letter);
+            Diamond diamond = BuildFirstHalf(letter);
 
-            if (diamond.Count > 1)
+            if (diamond.LinesCount > 1)
             {
                 diamond = BuildFullDiamond(diamond);
             }
 
-            return ToString(diamond);
+            return diamond.ToString();
         }
 
-        private static List<string> BuildFullDiamond(IReadOnlyList<string> diamond)
+        private static void GuardFromNonUpperCasedLetter(char letter)
         {
-            var result = new List<string>(diamond);
-
-            var diamondSecondPart = new List<string>();
-            for (var lineIndex = diamond.Count - 2; lineIndex >= 0; lineIndex--)
+            if (letter < 65 || letter > 90)
             {
-                diamondSecondPart.Add(diamond[lineIndex]);
+                throw new ArgumentOutOfRangeException("letter", "Should be an upper cased alphabetical letter");
             }
-
-            result.AddRange(diamondSecondPart);
-            return result;
         }
 
-        private static List<string> BuildFirstHalf(char letter)
+        private static Diamond BuildFirstHalf(char letter)
         {
-            var diamond = new List<string>();
+            var diamond = new Diamond();
 
             int externalPaddingCount = letter - 'A';
             IEnumerator<int> oddNumberProvider = new NumberProvider().GetOddNumbers();
@@ -56,11 +79,11 @@ namespace Diamonds
 
                 if (character == 'A')
                 {
-                    diamond.Add(externalPadding + character + internalPadding + externalPadding);
+                    diamond.AddLine(externalPadding + character + internalPadding + externalPadding);
                 }
                 else
                 {
-                    diamond.Add(externalPadding + character + internalPadding + character + externalPadding);
+                    diamond.AddLine(externalPadding + character + internalPadding + character + externalPadding);
                 }
                 
                 if (character == letter)
@@ -72,13 +95,33 @@ namespace Diamonds
             return diamond;
         }
 
-        private static string ToString(this IReadOnlyList<string> list)
+        private static Diamond BuildFullDiamond(Diamond incompleteDiamond)
+        {
+            var missingLines = new List<string>();
+            for (var lineIndex = incompleteDiamond.LinesCount - 2; lineIndex >= 0; lineIndex--)
+            {
+                missingLines.Add(incompleteDiamond[lineIndex]);
+            }
+
+            var fullDiamond = AddLines(incompleteDiamond, missingLines);
+            return fullDiamond;
+        }
+
+        private static Diamond AddLines(Diamond incompleteDiamond, IEnumerable<string> linesToAdd)
+        {
+            var diamond = new Diamond(incompleteDiamond);
+            diamond.lines.AddRange(linesToAdd);
+            
+            return diamond;
+        }
+
+        private new string ToString()
         {
             var result = new StringBuilder();
-            for(var lineCount = 0; lineCount < list.Count; lineCount++)
+            for(var lineCount = 0; lineCount < this.lines.Count; lineCount++)
             {
-                result.Append(list[lineCount]);
-                if (lineCount != list.Count - 1)
+                result.Append(this.lines[lineCount]);
+                if (lineCount != this.lines.Count - 1)
                 {
                     result.Append("\n");
                 }
@@ -87,11 +130,16 @@ namespace Diamonds
             return result.ToString();
         }
 
-        private static void GuardFromNonUpperCasedLetter(char letter)
+        private void AddLine(string line)
         {
-            if (letter < 65 || letter > 90)
+            this.lines.Add(line);
+        }
+
+        private int LinesCount
+        {
+            get
             {
-                throw new ArgumentOutOfRangeException("letter", "Should be an upper cased alphabetical letter");
+                return this.lines.Count;
             }
         }
     }
