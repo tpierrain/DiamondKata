@@ -43,24 +43,24 @@ namespace Diamonds
         {
             var diamond = new List<string>();
 
-            int leftPaddingCount = letter - 'A';
+            int externalPaddingCount = letter - 'A';
             IEnumerator<int> oddNumberProvider = new NumberProvider().GetOddNumbers();
 
             foreach (var character in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
             {
-                var leftPadding = string.Empty.PadRight(leftPaddingCount, '.');
-                leftPaddingCount--;
+                var externalPadding = string.Empty.PadRight(externalPaddingCount, '.');
+                externalPaddingCount--;
 
-                var middlePadding = string.Empty.PadRight(oddNumberProvider.Current, '.');
+                var internalPadding = string.Empty.PadRight(oddNumberProvider.Current, '.');
                 oddNumberProvider.MoveNext();
 
                 if (character == 'A')
                 {
-                    diamond.Add(leftPadding + character + middlePadding);
+                    diamond.Add(externalPadding + character + internalPadding + externalPadding);
                 }
                 else
                 {
-                    diamond.Add(leftPadding + character + middlePadding + character);
+                    diamond.Add(externalPadding + character + internalPadding + character + externalPadding);
                 }
                 
                 if (character == letter)
@@ -72,7 +72,7 @@ namespace Diamonds
             return diamond;
         }
 
-        private static string ToString(this List<string> list)
+        private static string ToString(this IReadOnlyList<string> list)
         {
             var result = new StringBuilder();
             for(var lineCount = 0; lineCount < list.Count; lineCount++)

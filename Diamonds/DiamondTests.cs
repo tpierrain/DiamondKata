@@ -23,13 +23,13 @@
         [Test]
         public void ShouldDisplayDiamond()
         {
-            Check.That(Diamond.Generate('D')).IsEqualTo("...A\n"+
-                                                        "..B.B\n"+
-                                                        ".C...C\n"+
+            Check.That(Diamond.Generate('D')).IsEqualTo("...A...\n"+
+                                                        "..B.B..\n"+
+                                                        ".C...C.\n"+
                                                         "D.....D\n"+
-                                                        ".C...C\n" +
-                                                        "..B.B\n" +
-                                                        "...A");
+                                                        ".C...C.\n" +
+                                                        "..B.B..\n" +
+                                                        "...A...");
         }
     }
 }
