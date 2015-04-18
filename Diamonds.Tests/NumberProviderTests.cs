@@ -1,7 +1,6 @@
-﻿namespace Diamonds
+namespace Diamonds.Tests
 {
     using NFluent;
-
     using NUnit.Framework;
 
     [TestFixture]

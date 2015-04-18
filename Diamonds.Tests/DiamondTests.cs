@@ -1,4 +1,4 @@
-﻿namespace Diamonds
+namespace Diamonds.Tests
 {
     using System;
     using NFluent;

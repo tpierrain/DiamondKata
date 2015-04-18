@@ -10,6 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FBD6B9
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diamonds.Tests", "Diamonds.Tests\Diamonds.Tests.csproj", "{62DB5BD9-272B-46ED-9A8B-C436606821FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0C2C798E-484A-406B-8BA2-CE58A9B44A1F}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +27,10 @@ Global
 		{C05F5B5F-659B-4BB3-BCB1-DD2599A5CA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C05F5B5F-659B-4BB3-BCB1-DD2599A5CA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C05F5B5F-659B-4BB3-BCB1-DD2599A5CA25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62DB5BD9-272B-46ED-9A8B-C436606821FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62DB5BD9-272B-46ED-9A8B-C436606821FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62DB5BD9-272B-46ED-9A8B-C436606821FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62DB5BD9-272B-46ED-9A8B-C436606821FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
