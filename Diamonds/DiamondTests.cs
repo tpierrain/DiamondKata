@@ -26,7 +26,7 @@
         [Test]
         public void ShouldDisplayLettersInTheOrderOnMultipleLines()
         {
-            Check.That(Diamond.Generate('B')).IsEqualTo("A\nBB\nA");
+            Check.That(Diamond.Generate('C')).IsEqualTo("A\nBB\nCC\nBB\nA");
         }
     }
 
