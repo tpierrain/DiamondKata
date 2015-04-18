@@ -9,11 +9,11 @@ with the supplied letter at the widest point.
 For example: print-diamond 'E' prints
 
 <pre>
- ...A        3
- ..B.B       3
- .C...C      4
-.D.....D     6
-E.......E    7   4
+ ...A        0
+ ..B.B       1
+ .C...C      3
+.D.....D     5
+E.......E    7 
  D     D
   C   C
    B B

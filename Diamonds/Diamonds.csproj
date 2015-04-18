@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diamond.cs" />
     <Compile Include="DiamondTests.cs" />
+    <Compile Include="NumberProvider.cs" />
+    <Compile Include="NumberProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
