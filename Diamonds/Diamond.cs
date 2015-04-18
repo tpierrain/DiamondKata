@@ -31,10 +31,10 @@ namespace Diamonds
         #endregion
 
         /// <summary>
-        /// Generates a diamond figure defined by the specified letter.
+        /// Generates a diamond ASCII-art figure defined from the specified upper-cased letter.
         /// </summary>
-        /// <param name="letter">The letter to be used for the widest part of the diamond.</param>
-        /// <returns>A diamond figure defined by the specified letter.</returns>
+        /// <param name="letter">The upper cased letter to be used for the widest part of the diamond.</param>
+        /// <returns>A diamond ASCII-art figure defined by the specified upper-cased letter.</returns>
         public static string Generate(char letter)
         {
             GuardFromNonUpperCasedLetter(letter);
@@ -121,13 +121,18 @@ namespace Diamonds
             for(var lineCount = 0; lineCount < this.lines.Count; lineCount++)
             {
                 result.Append(this.lines[lineCount]);
-                if (lineCount != this.lines.Count - 1)
+                if (this.IsNotLastLine(lineCount))
                 {
                     result.Append("\n");
                 }
             }
 
             return result.ToString();
+        }
+
+        private bool IsNotLastLine(int lineCount)
+        {
+            return lineCount != this.lines.Count - 1;
         }
 
         private void AddLine(string line)
