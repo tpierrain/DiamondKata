@@ -15,17 +15,14 @@ namespace Diamonds
                 return "A";
             }
 
-            var leftPaddingCount = letter - 'A';
-            var oddNumberProvider = new NumberProvider().GetOddNumbers();
-
-            List<string> diamond = BuildFirstHalf(letter, leftPaddingCount, oddNumberProvider);
+            List<string> diamond = BuildFirstHalf(letter);
 
             if (diamond.Count > 1)
             {
                 diamond = BuildFullDiamond(diamond);
             }
 
-            return diamond.GenerateStringVersion();
+            return ToString(diamond);
         }
 
         private static List<string> BuildFullDiamond(IReadOnlyList<string> diamond)
@@ -42,9 +39,12 @@ namespace Diamonds
             return result;
         }
 
-        private static List<string> BuildFirstHalf(char letter, int leftPaddingCount, IEnumerator<int> oddNumberProvider)
+        private static List<string> BuildFirstHalf(char letter)
         {
             var diamond = new List<string>();
+
+            int leftPaddingCount = letter - 'A';
+            IEnumerator<int> oddNumberProvider = new NumberProvider().GetOddNumbers();
 
             foreach (var character in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
             {
@@ -61,17 +61,18 @@ namespace Diamonds
                 else
                 {
                     diamond.Add(leftPadding + character + middlePadding + character);
-                    if (character == letter)
-                    {
-                        break;
-                    }
+                }
+                
+                if (character == letter)
+                {
+                    break;
                 }
             }
 
             return diamond;
         }
 
-        private static string GenerateStringVersion(this List<string> list)
+        private static string ToString(this List<string> list)
         {
             var result = new StringBuilder();
             for(var lineCount = 0; lineCount < list.Count; lineCount++)
