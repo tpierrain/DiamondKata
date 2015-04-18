@@ -24,9 +24,9 @@
         }
 
         [Test]
-        public void ShouldDisplayLettersInTheOrder()
+        public void ShouldDisplayLettersInTheOrderOnMultipleLines()
         {
-            Check.That(Diamond.Generate('B')).IsEqualTo("ABBA");
+            Check.That(Diamond.Generate('B')).IsEqualTo("A\nBB\nA");
         }
     }
 
@@ -81,10 +81,10 @@
             for(var lineCount = 0; lineCount < list.Count; lineCount++)
             {
                 result.Append(list[lineCount]);
-                //if (lineCount != list.Count - 1)
-                //{
-                //    result.Append("\n");
-                //}
+                if (lineCount != list.Count - 1)
+                {
+                    result.Append("\n");
+                }
             }
 
 
