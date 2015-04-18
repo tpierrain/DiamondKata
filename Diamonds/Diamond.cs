@@ -44,14 +44,10 @@ namespace Diamonds
                 return "A";
             }
 
-            Diamond diamond = BuildFirstHalf(letter);
+            var firstHalf = BuildFirstHalf(letter);
+            var completeDiamond = BuildCompleteDiamond(firstHalf);
 
-            if (diamond.LinesCount > 1)
-            {
-                diamond = BuildFullDiamond(diamond);
-            }
-
-            return diamond.ToString();
+            return completeDiamond.ToString();
         }
 
         private static void GuardFromNonUpperCasedLetter(char letter)
@@ -95,7 +91,7 @@ namespace Diamonds
             return diamond;
         }
 
-        private static Diamond BuildFullDiamond(Diamond incompleteDiamond)
+        private static Diamond BuildCompleteDiamond(Diamond incompleteDiamond)
         {
             var missingLines = new List<string>();
             for (var lineIndex = incompleteDiamond.LinesCount - 2; lineIndex >= 0; lineIndex--)
