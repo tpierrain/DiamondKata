@@ -4,7 +4,7 @@
 
     public class NumberProvider
     {
-        public static IEnumerator<int> GetOddNumbers()
+        public IEnumerator<int> GetOddNumbers()
         {
             for (var number = 0; number <= int.MaxValue; number++)
             {

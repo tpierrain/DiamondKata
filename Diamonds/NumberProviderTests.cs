@@ -16,7 +16,7 @@ namespace Diamonds
         [Test]
         public void ShouldProvideOddNumbersOnly()
         {
-            var oddNumbers = NumberProvider.GetOddNumbers();
+            var oddNumbers = new NumberProvider().GetOddNumbers();
 
             Check.That(oddNumbers.Current).IsEqualTo(0);
 

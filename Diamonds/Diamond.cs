@@ -15,26 +15,52 @@ namespace Diamonds
                 return "A";
             }
 
+            var leftPaddingCount = letter - 'A';
+            var oddNumberProvider = new NumberProvider().GetOddNumbers();
+
+            List<string> diamond = BuildFirstHalf(letter, leftPaddingCount, oddNumberProvider);
+
+            if (diamond.Count > 1)
+            {
+                diamond = BuildFullDiamond(diamond);
+            }
+
+            return diamond.GenerateStringVersion();
+        }
+
+        private static List<string> BuildFullDiamond(IReadOnlyList<string> diamond)
+        {
+            var result = new List<string>(diamond);
+
+            var diamondSecondPart = new List<string>();
+            for (var lineIndex = diamond.Count - 2; lineIndex >= 0; lineIndex--)
+            {
+                diamondSecondPart.Add(diamond[lineIndex]);
+            }
+
+            result.AddRange(diamondSecondPart);
+            return result;
+        }
+
+        private static List<string> BuildFirstHalf(char letter, int leftPaddingCount, IEnumerator<int> oddNumberProvider)
+        {
             var diamond = new List<string>();
-            
-            var leftPaddingSize = letter - 'A';
-            var oddNumberProvider = NumberProvider.GetOddNumbers();
 
             foreach (var character in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
             {
-                var leftPadding = string.Empty.PadRight(leftPaddingSize, '.');
-                leftPaddingSize--;
-                
+                var leftPadding = string.Empty.PadRight(leftPaddingCount, '.');
+                leftPaddingCount--;
+
                 var middlePadding = string.Empty.PadRight(oddNumberProvider.Current, '.');
                 oddNumberProvider.MoveNext();
 
                 if (character == 'A')
                 {
-                    diamond.Add(leftPadding + "A");
+                    diamond.Add(leftPadding + character + middlePadding);
                 }
                 else
                 {
-                    diamond.Add(leftPadding + character.ToString() + middlePadding + character.ToString());
+                    diamond.Add(leftPadding + character + middlePadding + character);
                     if (character == letter)
                     {
                         break;
@@ -42,21 +68,10 @@ namespace Diamonds
                 }
             }
 
-            if (diamond.Count > 1)
-            {
-                var diamondSecondPart = new List<string>();
-                for (var lineIndex = diamond.Count-2; lineIndex >= 0; lineIndex--)
-                {
-                    diamondSecondPart.Add(diamond[lineIndex]);
-                }
-
-                diamond.AddRange(diamondSecondPart);
-            }
-
-            return diamond.ExportDiamond();
+            return diamond;
         }
 
-        private static string ExportDiamond(this List<string> list)
+        private static string GenerateStringVersion(this List<string> list)
         {
             var result = new StringBuilder();
             for(var lineCount = 0; lineCount < list.Count; lineCount++)

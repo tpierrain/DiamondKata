@@ -1,8 +1,6 @@
 ﻿namespace Diamonds
 {
     using System;
-    using System.Security.Cryptography;
-
     using NFluent;
     using NUnit.Framework;
 
