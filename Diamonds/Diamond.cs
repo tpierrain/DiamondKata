@@ -6,30 +6,6 @@ namespace Diamonds
 
     public class Diamond
     {
-        #region Fields, Constructors & indexer
-
-        private readonly List<string> lines;
-
-        private Diamond()
-        {
-            this.lines = new List<string>();
-        }
-
-        private Diamond(Diamond diamond)
-        {
-            this.lines = new List<string>(diamond.lines);
-        }
-
-        private string this[int lineIndex]
-        {
-            get
-            {
-                return this.lines[lineIndex];
-            }
-        }
-
-        #endregion
-
         /// <summary>
         /// Generates a diamond ASCII-art figure defined from the specified upper-cased letter.
         /// </summary>
@@ -93,13 +69,13 @@ namespace Diamonds
 
         private static Diamond MirrorDiamond(Diamond incompleteDiamond)
         {
-            var missingLines = new List<string>();
+            var mirroredLines = new List<string>();
             for (var lineIndex = incompleteDiamond.LinesCount - 2; lineIndex >= 0; lineIndex--)
             {
-                missingLines.Add(incompleteDiamond[lineIndex]);
+                mirroredLines.Add(incompleteDiamond[lineIndex]);
             }
 
-            var fullDiamond = MergeDiamondWithLines(incompleteDiamond, missingLines);
+            var fullDiamond = MergeDiamondWithLines(incompleteDiamond, mirroredLines);
             return fullDiamond;
         }
 
@@ -125,6 +101,30 @@ namespace Diamonds
 
             return result.ToString();
         }
+
+        #region Fields, Constructors & indexer
+
+        private readonly List<string> lines;
+
+        private Diamond()
+        {
+            this.lines = new List<string>();
+        }
+
+        private Diamond(Diamond diamond)
+        {
+            this.lines = new List<string>(diamond.lines);
+        }
+
+        private string this[int lineIndex]
+        {
+            get
+            {
+                return this.lines[lineIndex];
+            }
+        }
+
+        #endregion
 
         private bool IsNotLastLine(int lineCount)
         {
