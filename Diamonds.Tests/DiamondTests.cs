@@ -20,6 +20,17 @@ namespace Diamonds.Tests
             Check.That(Diamond.GenerateAsciiArtFor('a')).IsEqualTo("A");
         }
 
+        // Following the strategy suggested by Seb Rose, the next test has been successfully 
+        // recycled to cover a new property at a time. In my case: 
+        // 
+        //  - ShouldGenerateLettersInTheProperOrder()   // ABC
+        //  - ShouldGenerateDoubleLetters()             // ABBCC
+        //  - ShouldGenerateLettersInMirror()           // ABBCCBBA
+        //  - ShouldGenerateALineForEveryLetter()       // A\nBB\nCC\nBB\nA
+        //  - ShouldIntroduceLeftPadding()              // ....
+        //  - ShouldIntroduceMiddlePadding()
+        //    ...
+        //  - ShouldGenerateAsciiArtForD()
         [Test]
         public void ShouldGenerateAsciiArtForD()
         {
